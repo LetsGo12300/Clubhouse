@@ -8,20 +8,26 @@
 	<title>Clubhouse: <%= title %></title>
   </head>
   <body>
-    <h1>Log In</h1>
-    <form action="/log-in" method="POST">
-		<div>
-			<label for="username">Username</label>
-			<input type="text" name="username" id="username" placeholder="Enter your username">
-		</div>
-		<div>
-			<label for="password">Password</label>
-			<input type="password" name="password" id="password" placeholder="Enter your password">
-		</div>
-		<button>Log In</button>
-    </form>
-    <br>
-    No account yet?
-    <a href="/sign-up">Sign Up now!</a>
+	<% if (user) { %>
+        <h4>Logged in as "<%= user.username %>"</h4>
+        <a href="/log-out">LOG OUT</a>
+	<% } else { %>
+		<h1>Log In</h1>
+		<form action="/log-in" method="POST">
+			<div>
+				<label for="username">Username</label>
+				<input type="text" name="username" id="username" placeholder="Enter your username">
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" placeholder="Enter your password">
+			</div>
+			<button>Log In</button>
+		</form>
+		<br>
+		No account yet?
+		<a href="/sign-up">Sign Up now!</a>
+	<% } %>
+    
   </body>
 </html>
