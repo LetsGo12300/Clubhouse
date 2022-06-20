@@ -1,13 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-var app = express();
+// Add dotenv config
+dotenv.config()
+
+// Import models from folder
+const User = require('./models/User');
+const Messages = require('./models/Messages');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +30,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+mongoose.connect(
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@sandbox.53gsr.mongodb.net/Clubhouse?retryWrites=true&w=majority`,
+  { useUnifiedTopology: true }
+)
+
+// Check if connected to database:
+const db = mongoose.connection
+db.once('open', _ => {
+  console.log('Connected to Database')
+})
+db.on('error', err => {
+  console.error('connection error:', err)
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
