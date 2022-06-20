@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const session = require("express-session");
+const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -17,6 +19,20 @@ dotenv.config()
 // Import models from folder
 const User = require('./models/User');
 const Messages = require('./models/Messages');
+
+mongoose.connect(
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@sandbox.53gsr.mongodb.net/Clubhouse?retryWrites=true&w=majority`,
+  { useUnifiedTopology: true }
+)
+
+// Check if connected to database:
+const db = mongoose.connection
+db.once('open', _ => {
+  console.log('Connected to Database')
+})
+db.on('error', err => {
+  console.error('connection error:', err)
+})
 
 const app = express();
 
@@ -39,19 +55,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-mongoose.connect(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@sandbox.53gsr.mongodb.net/Clubhouse?retryWrites=true&w=majority`,
-  { useUnifiedTopology: true }
-)
+app.use(passport.initialize());
 
-// Check if connected to database:
-const db = mongoose.connection
-db.once('open', _ => {
-  console.log('Connected to Database')
-})
-db.on('error', err => {
-  console.error('connection error:', err)
-})
+passport.use(
+    new LocalStrategy((username, password, done) => {
+      User.findOne({ username: username }, (err, user) => {
+        if (err) { 
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, { message: "Incorrect username" });
+        }
+        bcrypt.compare(password, user.password, (err, res) => {
+            if (res) {
+              // passwords match! log user in
+              return done(null, user)
+            } else {
+              // passwords do not match!
+              return done(null, false, { message: "Incorrect password" })
+            }
+          })
+      });
+    })
+  );
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
