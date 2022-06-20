@@ -10,6 +10,8 @@
   <body>
 	<% if (user) { %>
         <h4>Logged in as "<%= user.fullName %>"</h4>
+		<a href="/join-the-club">Join the club</a>
+		<br>
         <a href="/log-out">LOG OUT</a>
 	<% } else { %>
 		<h1>Log In</h1>

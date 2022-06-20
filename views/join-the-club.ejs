@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubhose: <%= title %></title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+<body>
+    <form action="/join-the-club/check" method="POST">
+        <div>
+            <label for="passcode">Enter the correct passcode to join the club:</label>
+            <input name="passcode" type="password" />
+        </div>
+        <button>Enter passcode</button>
+    </form>
+</body>
+</html>

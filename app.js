@@ -11,7 +11,7 @@ const session = require("express-session");
 const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const jointheclubRouter = require('./routes/join-the-club');
 
 // Add dotenv config
 dotenv.config()
@@ -52,11 +52,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-app.use(passport.initialize());
-
 passport.use(
     new LocalStrategy((username, password, done) => {
       User.findOne({ username: username }, (err, user) => {
@@ -88,6 +83,15 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
+// Access the user object from anywhere
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use('/', indexRouter);
+app.use('/join-the-club', jointheclubRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

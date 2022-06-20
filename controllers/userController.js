@@ -1,67 +1,37 @@
 // Import User model
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const passport = require("passport");
 
 // For user input sanitation/validation
 const { body, validationResult } = require('express-validator');
 
-exports.index_get = (req, res, next) => {
-    res.render('index', { title: 'Log In', user: req.user });
+exports.joinclub_get = (req, res) => {
+    res.render('join-the-club', { title: 'Join the Club'})
 }
 
-exports.signup_get = (req, res, next) => {
-	res.render('signup', { title: 'Sign Up', msg: '' })
-}
-
-exports.signup_post = [
-    body('confirm-password')
-        .custom((value, { req }) => {
-            if (value !== req.body.password){
-                throw new Error('Passwords do not match!')
-            }
-            return true;
-        }), 
+exports.joinclub_post = [
+    body('passcode')
+    .custom( value => {
+        // clubhouse passcode = bestclubever
+        if (value !== 'bestclubever'){
+            throw new Error('Incorrect passcode!')
+        }
+        return true;
+    }), 
     (req, res, next) => {
-        // Check if there are errors in the form
+        // Check if passcode is correct or incorrect
         const result = validationResult(req)
         if (!result.isEmpty()){
-            const msg = "User failed to sign up!"
-            console.log(msg)
-            // Pre-fill the sign up form with full name and username
-            return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username] })
+            const msg = "Incorrect passcode. Please try again"
+            return res.redirect('/join-the-club')
         }
 
-        // If there are no errors, proceed to save new user to database
-        try {
-            bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-                if (err){
-                    return next(err);
-                } else {
-                    const user = new User({
-                        username: req.body.username,
-                        password: hashedPassword,
-                        fullName: req.body.fullname
-                    })
-                    .save(err => err ? next(err) : res.redirect('/'))
-                }
-            })
-        } catch (err) {
-            return next(err)
-        }
-    ;}
+        // If passcode is correct, change account to member
+        const user = new User(res.locals.currentUser)
+        const update = {membershipStatus: 'Member'}
+        
+        User.findByIdAndUpdate(user._id, update, {}, (err) => {
+            if (err) return next(err);
+            return res.redirect('/');
+        })
+    }
 ]
-
-exports.login_post = passport.authenticate("local", {
-    successRedirect: '/',
-    failureRedirect: '/'
-})
-
-exports.logout_get = (req, res) => {
-    req.logout(function (err) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/");
-    });
-}
