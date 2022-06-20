@@ -41,7 +41,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Import middleware for express-session and passport
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(session({ secret: `${process.env.SESSION_SECRET}`, cookie: { maxAge: 3600000 }, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
