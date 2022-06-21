@@ -11,9 +11,15 @@
     <form action="/join-the-club/check" method="POST">
         <div>
             <label for="passcode">Enter the correct passcode to join the club:</label>
-            <input name="passcode" type="password" />
+            <input name="passcode" type="password" class="password-input"/>
+        </div>
+        <div>
+            <input type="checkbox" id="checkbox" onclick="showPassword()">
+            <label for="checkbox">Show Password</label>
         </div>
         <button>Enter passcode</button>
     </form>
+    
+    <script src="/javascripts/toggle-password.js"></script>
 </body>
 </html>

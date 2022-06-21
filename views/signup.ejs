@@ -21,11 +21,15 @@
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password">
+                <input type="password" name="password" id="password" placeholder="Enter your password" class="password-input">
             </div>
             <div>
                 <label for="password">Confirm Password</label>
-                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password">
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="password-input">
+            </div>
+            <div>
+                <input type="checkbox" id="checkbox" onclick="showPassword()">
+                <label for="checkbox">Show Password</label>
             </div>
             <button>Sign Up</button>
         </form>
@@ -42,14 +46,20 @@
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password">
+                <input type="password" name="password" id="password" placeholder="Enter your password"class="password-input" class="password-input">
             </div>
             <div>
                 <label for="password">Confirm Password</label>
-                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password">
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="password-input">
+            </div>
+            <div>
+                <input type="checkbox" id="checkbox" onclick="showPassword()">
+                <label for="checkbox">Show Password</label>
             </div>
             <button>Sign Up</button>
         </form>
     <% } %>
+    
+    <script src="/javascripts/toggle-password.js"></script>
 </body>
 </html>
