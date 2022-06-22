@@ -15,10 +15,13 @@ a {
 }
 
 .message-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid black;
   padding: 0.5rem;
   margin: 1rem 0rem;
-  min-height: 80px;
+  min-height: 60px;
 }
 
 .message-title{
@@ -28,4 +31,5 @@ a {
 
 .message-message{
   color: #1e293b;
+  word-break: break-all;
 }

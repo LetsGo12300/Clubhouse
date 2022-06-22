@@ -58,17 +58,17 @@
 				<div class="message-title">
 					<%= messages[i].title %>
 				</div>
-				<% if (user) { %>
-					<div class="message-author">
-						<%= messages[i].user.fullName %>
-					</div>
-					<div class="message-timestamp">
-						<%= messages[i].timestamp %>
-					</div>
-				<% } %> 
 				<div class="message-message">
 					<%= messages[i].message %>
 				</div>
+				<% if (user) { %>
+					<div class="message-author">
+						by <%= messages[i].user.fullName %>
+					</div>
+					<div class="message-timestamp">
+						<%= messages[i].formatTimestamp %>
+					</div>
+				<% } %> 
 			</div>
 		<% } %> 
 	</div>
