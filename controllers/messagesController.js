@@ -5,6 +5,16 @@ const Message = require('../models/Messages');
 // For user input sanitation/validation
 const { body, validationResult } = require('express-validator');
 
+exports.index_get = (req, res, next) => {
+    // Find all messages in the database
+    Message.find()
+    .sort({timestamp: -1}) // sort by descending according to timestamp
+    .then(messages => {
+        res.render('index', { title: 'Log In', user: req.user, messages: messages})
+    })
+    .catch(error => console.error(error))
+}
+
 exports.message_post = [
     body('title').trim().not().isEmpty(),
     body('message').trim().not().isEmpty(),
