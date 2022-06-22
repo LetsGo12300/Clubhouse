@@ -9,6 +9,7 @@ exports.index_get = (req, res, next) => {
     // Find all messages in the database
     Message.find()
     .sort({timestamp: -1}) // sort by descending according to timestamp
+    .populate('user')
     .then(messages => {
         res.render('index', { title: 'Log In', user: req.user, messages: messages})
     })
