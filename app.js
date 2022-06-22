@@ -11,6 +11,7 @@ const session = require("express-session");
 const bcrypt = require('bcryptjs');
 
 const indexRouter = require('./routes/index');
+const apiRouter = require('./routes/api');
 const jointheclubRouter = require('./routes/join-the-club');
 
 // Add dotenv config
@@ -91,6 +92,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
+app.use('/api', apiRouter);
 app.use('/join-the-club', jointheclubRouter);
 
 // catch 404 and forward to error handler

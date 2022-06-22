@@ -54,7 +54,7 @@
 	
 	<div class="messages-container">
 		<% for (let i = 0; i < messages.length; i++) { %>
-			<div class="message-item">
+			<div class="message-item" msg-id=<%= messages[i]._id %>>
 				<div class="message-title">
 					<%= messages[i].title %>
 				</div>

@@ -1,5 +1,4 @@
 // Import User and Messages model
-const User = require('../models/User');
 const Message = require('../models/Messages');
 
 // For user input sanitation/validation
@@ -43,3 +42,13 @@ exports.message_post = [
         })
     }
 ]
+
+exports.message_delete = (req, res, next) => {
+    // Delete message based on message object _id
+    Message.findByIdAndDelete(req.params.id, (err) => {
+        if (err) return next(err);
+        res.status()
+    })
+    console.log(req.params.id)
+    res.status(200).send({message: "Message successfully deleted!"})
+}
