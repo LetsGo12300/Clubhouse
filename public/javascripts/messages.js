@@ -6,7 +6,7 @@ addButton.addEventListener('click', event => {
     
     postMessage('/api/post', { title, message })
     .then(data => {
-        console.log(data);
+        addMessage(data)
     })
     .catch(err => {
         console.log(err)
@@ -30,6 +30,40 @@ window.addEventListener('click', event => {
         })
     }
 })
+
+// Prepend new message to top of container
+function addMessage(data){
+    const messagesContainer = document.getElementsByClassName('messages-container')[0];
+    let btn = '';
+
+    if (data.userMemStatus === 'Admin'){
+        btn = `<button data-id=${data._id} class="delete-btn">Delete</button>`
+    }
+
+    let content = `
+        <div class="message-item" msg-id=${data._id}>
+            <div class="message-title">
+                ${data.title}
+            </div>
+
+            <div class="message-message">
+                ${data.message}
+            </div>
+
+            <div class="message-author">
+                by ${data.user}
+            </div>
+
+            <div class="message-timestamp">
+                ${data.formatTimestamp}
+            </div>
+
+            ${btn}
+        </div>
+    `;
+
+    messagesContainer.insertAdjacentHTML('afterbegin', content)
+}
 
 // Fetch API
 async function postMessage(url, data){

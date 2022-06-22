@@ -34,10 +34,16 @@ exports.message_post = [
         })
 
         // Save message to database
-        message.save((err) => {
+        message.save((err, result) => {
             if (err) return next(err);
+            // Send new message's details for updating of DOM
             res.status(201).send({
-                message: "Message successfully posted!"
+                title: result.title,
+                message: result.message,
+                user: result.user.fullName,
+                userMemStatus: result.user.membershipStatus,
+                formatTimestamp: result.formatTimestamp,
+                _id: result._id
             })
         })
     }
