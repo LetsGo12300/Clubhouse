@@ -10,8 +10,26 @@
   <body>
 	<% if (user) { %>
         <h4>Logged in as "<%= user.fullName %>"</h4>
-		<a href="/join-the-club">Join the club</a>
-		<br>
+		<% if (user.membershipStatus === 'Member') { %>
+			Congrats! You're already a member of the Clubhouse
+			<h3>Add Message</h3>
+			<form method="POST" id="add-message-form">
+				<div>
+					
+					<label for="title">Title: </label>
+					<input type="text" name="title" id="title"/>
+				</div>
+				<div>
+					<p><label for="message">Message:</label></p>
+					<textarea id="message" name="message" rows="4" cols="50"></textarea>
+				</div>
+				<button type="submit" id="add-message-btn">Post</button>
+			</form>
+			<script src="/javascripts/messages.js"></script>
+		<% } else { %>
+			<a href="/join-the-club">Join the club</a>
+		<% } %>
+		<br><br>
         <a href="/log-out">LOG OUT</a>
 	<% } else { %>
 		<h1>Log In</h1>
