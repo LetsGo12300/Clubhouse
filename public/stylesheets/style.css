@@ -15,6 +15,7 @@ a {
 }
 
 .message-item{
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,4 +33,12 @@ a {
 .message-message{
   color: #1e293b;
   word-break: break-all;
+}
+
+.delete-btn{
+  width: fit-content;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  transform: translate(-0.5rem, 0.5rem);
 }

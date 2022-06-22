@@ -21,7 +21,7 @@ exports.signup_post = [
                 throw new Error('Passwords do not match!')
             }
             return true;
-        }), 
+        }),
     (req, res, next) => {
         // Check if there are errors in the form
         const result = validationResult(req)
@@ -41,7 +41,8 @@ exports.signup_post = [
                     const user = new User({
                         username: req.body.username,
                         password: hashedPassword,
-                        fullName: req.body.fullname
+                        fullName: req.body.fullname,
+                        membershipStatus: (req.body.admin ? 'Admin' : 'Non-member')
                     })
                     .save(err => err ? next(err) : res.redirect('/'))
                 }

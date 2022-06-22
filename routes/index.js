@@ -3,7 +3,7 @@ const router = express.Router();
 const accountsController = require('../controllers/accountsController');
 const messagesController = require('../controllers/messagesController');
 
-router.get('/', messagesController.index_get);
+router.get('/', messagesController.messages_get);
 router.post('/api/post', messagesController.message_post)
 
 router.get('/sign-up', accountsController.signup_get);

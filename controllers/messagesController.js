@@ -5,7 +5,7 @@ const Message = require('../models/Messages');
 // For user input sanitation/validation
 const { body, validationResult } = require('express-validator');
 
-exports.index_get = (req, res, next) => {
+exports.messages_get = (req, res, next) => {
     // Find all messages in the database
     Message.find()
     .sort({timestamp: -1}) // sort by descending according to timestamp

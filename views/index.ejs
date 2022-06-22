@@ -10,8 +10,8 @@
   <body>
 	<% if (user) { %>
         <h4>Logged in as "<%= user.fullName %>"</h4>
-		<% if (user.membershipStatus === 'Member') { %>
-			Congrats! You're already a member of the Clubhouse
+		<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
+			Membership Status: <%= user.membershipStatus  %> 
 			<h3>Add Message</h3>
 			<form method="POST" id="add-message-form">
 				<div>
@@ -25,7 +25,7 @@
 				<button type="submit" id="add-message-btn">Post</button>
 			</form>
 			<script src="/javascripts/messages.js"></script>
-		<% } else { %>
+		<% } else if (user.membershipStatus === 'Non-member') { %>
 			<a href="/join-the-club">Join the club</a>
 		<% } %>
 		<br><br>
@@ -62,12 +62,18 @@
 					<%= messages[i].message %>
 				</div>
 				<% if (user) { %>
-					<div class="message-author">
-						by <%= messages[i].user.fullName %>
-					</div>
-					<div class="message-timestamp">
-						<%= messages[i].formatTimestamp %>
-					</div>
+					<% if (user.membershipStatus === 'Admin') { %>
+						<button data-id=<%= messages[i]._id %> class="delete-btn">Delete</button>
+					<% } %>
+
+					<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
+						<div class="message-author">
+							by <%= messages[i].user.fullName %>
+						</div>
+						<div class="message-timestamp">
+							<%= messages[i].formatTimestamp %>
+						</div>
+					<% } %>
 				<% } %> 
 			</div>
 		<% } %> 
