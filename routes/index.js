@@ -7,6 +7,7 @@ router.get('/', messagesController.messages_get);
 
 router.get('/sign-up', accountsController.signup_get);
 router.post('/sign-up', accountsController.signup_post);
+router.get('/log-in', accountsController.login_get);
 router.post('/log-in', accountsController.login_post);
 router.get('/log-out', accountsController.logout_get);
 

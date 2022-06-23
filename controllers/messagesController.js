@@ -5,12 +5,14 @@ const Message = require('../models/Messages');
 const { body, validationResult } = require('express-validator');
 
 exports.messages_get = (req, res, next) => {
+    console.log(res.locals.currentUser)
     // Find all messages in the database
     Message.find()
     .sort({timestamp: -1}) // sort by descending according to timestamp
-    .populate('user')
+    .populate('user', 'fullName')
     .then(messages => {
-        res.render('index', { title: 'Log In', user: res.locals.currentUser, messages: messages})
+        console.log(messages)
+        res.render('index', { title: 'Home', user: res.locals.currentUser, messages: messages})
     })
     .catch(error => console.error(error))
 }

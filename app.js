@@ -111,7 +111,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error', {title: 'ERROR'});
+  res.render('error', {title: 'ERROR', user: res.locals.currentUser});
 });
 
 module.exports = app;

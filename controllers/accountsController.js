@@ -7,7 +7,7 @@ const passport = require("passport");
 const { body, validationResult } = require('express-validator');
 
 exports.signup_get = (req, res, next) => {
-	res.render('signup', { title: 'Sign Up', msg: '', user: res.locals.user})
+	res.render('signup', { title: 'Sign Up', msg: '', user: res.locals.currentUser})
 }
 
 exports.signup_post = [
@@ -25,7 +25,7 @@ exports.signup_post = [
             const msg = "User failed to sign up!"
             console.log(msg)
             // Pre-fill the sign up form with full name and username
-            return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username], user: res.locals.user })
+            return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username], user: res.locals.currentUser })
         }
 
         // If there are no errors, proceed to save new user to database
@@ -40,7 +40,7 @@ exports.signup_post = [
                         fullName: req.body.fullname,
                         membershipStatus: (req.body.admin ? 'Admin' : 'Non-member')
                     })
-                    .save(err => err ? next(err) : res.redirect('/'))
+                    .save(err => err ? next(err) : res.redirect('/log-in'))
                 }
             })
         } catch (err) {
@@ -48,6 +48,10 @@ exports.signup_post = [
         }
     }
 ]
+
+exports.login_get = (req, res) => {
+    res.render('login', { title: 'Log In', user: res.locals.currentUser })
+}
 
 exports.login_post = passport.authenticate("local", {
     successRedirect: '/',

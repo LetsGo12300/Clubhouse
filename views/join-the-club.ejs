@@ -1,5 +1,21 @@
 <%- include('./partials/header') %> 
 
+                <a class="nav-link" href="/">Home</a>
+                <% if (user) { %> 
+                    <% if (user.membershipStatus === 'Non-member') { %> 
+                        <a class="nav-link active" aria-current="page" href="/join-the-club">Join the club</a>
+                    <% } %> 
+                    <a class="nav-link" href="/log-out">Log Out</a>
+                    <div class="nav-link disabled">(Logged in as <%= user.username %>)</div>
+                <% } else { %> 
+                    <a class="nav-link" href="/log-in">Log In</a>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid p-4">
+
     <form action="/join-the-club/check" method="POST">
         <div>
             <label for="passcode">Enter the correct passcode to join the club:</label>

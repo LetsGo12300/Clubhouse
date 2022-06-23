@@ -1,0 +1,41 @@
+<%- include('./partials/header') %> 
+
+                <a class="nav-link" href="/">Home</a>
+                <% if (user) { %> 
+                    <% if (user.membershipStatus === 'Non-member') { %> 
+                        <a class="nav-link" href="/join-the-club">Join the club</a>
+                    <% } %> 
+                    <a class="nav-link" href="/log-out">Log Out</a>
+                    <div class="nav-link disabled">(Logged in as <%= user.username %>)</div>
+                <% } else { %> 
+                    <a class="nav-link active" aria-current="page" href="/log-in">Log In</a>
+                    <a class="nav-link" href="/sign-up">Sign Up</a>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid p-4">
+
+    <h1>Log In</h1>
+    <form action="/log-in" method="POST">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" class="password-input">
+        </div>
+        <div>
+            <input type="checkbox" id="checkbox" onclick="showPassword()">
+            <label for="checkbox">Show Password</label>
+        </div>
+        <button>Log In</button>
+    </form>
+    <br>
+    No account yet?
+    <a href="/sign-up">Sign Up now!</a>
+
+	<script src="/javascripts/toggle-password.js"></script>
+<%- include('./partials/footer') %> 
