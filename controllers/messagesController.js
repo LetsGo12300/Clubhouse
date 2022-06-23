@@ -10,7 +10,7 @@ exports.messages_get = (req, res, next) => {
     .sort({timestamp: -1}) // sort by descending according to timestamp
     .populate('user')
     .then(messages => {
-        res.render('index', { title: 'Log In', user: req.user, messages: messages})
+        res.render('index', { title: 'Log In', user: res.locals.currentUser, messages: messages})
     })
     .catch(error => console.error(error))
 }

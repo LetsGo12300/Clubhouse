@@ -5,7 +5,7 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 
 exports.joinclub_get = (req, res) => {
-    res.render('join-the-club', { title: 'Join the Club'})
+    res.render('join-the-club', { title: 'Join the Club', user: res.locals.currentUser})
 }
 
 exports.joinclub_post = [

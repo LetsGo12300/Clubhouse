@@ -6,12 +6,8 @@ const passport = require("passport");
 // For user input sanitation/validation
 const { body, validationResult } = require('express-validator');
 
-exports.index_get = (req, res, next) => {
-    res.render('index', { title: 'Log In', user: req.user })
-}
-
 exports.signup_get = (req, res, next) => {
-	res.render('signup', { title: 'Sign Up', msg: '' })
+	res.render('signup', { title: 'Sign Up', msg: '', user: res.locals.user})
 }
 
 exports.signup_post = [
@@ -29,7 +25,7 @@ exports.signup_post = [
             const msg = "User failed to sign up!"
             console.log(msg)
             // Pre-fill the sign up form with full name and username
-            return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username] })
+            return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username], user: res.locals.user })
         }
 
         // If there are no errors, proceed to save new user to database
@@ -63,10 +59,6 @@ exports.logout_get = (req, res) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      res.redirect('/');
     });
-}
-
-exports.joinclub_get = (req, res) => {
-    res.render('join-the-club', { title: 'Join the Club'})
 }

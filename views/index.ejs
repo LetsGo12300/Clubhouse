@@ -1,8 +1,6 @@
 <%- include('./partials/header') %> 
 	<% if (user) { %>
-        <h4>Logged in as "<%= user.fullName %>"</h4>
 		<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
-			Membership Status: <%= user.membershipStatus  %> 
 			<h3>Add Message</h3>
 			<form method="POST" id="add-message-form">
 				<div>

@@ -6,14 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
 	<title>Clubhouse: <%= title %></title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1 d-flex align-items-center">
-                Clubhouse
-            </span>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <div class="container-fluid justify-content-between">
+            <span class="navbar-brand mb-0 h1">Clubhouse</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarClubhouse" aria-controls="navbarClubhouse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarClubhouse">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <% if (user) { %> 
+                        <% if (user.membershipStatus === 'Non-member') { %> 
+                            <a class="nav-link" href="/join-the-club">Join the club</a>
+                        <% } %> 
+                        <div class="nav-link disabled">(Logged in as <%= user.username %>)</div>
+                        <a class="nav-link" href="/log-out">Log Out</a>
+                    <% } else { %> 
+                        <a class="nav-link" href="/log-in">Log In</a>
+                    <% } %> 
+                  
+                </div>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid p-4">
