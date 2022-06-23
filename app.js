@@ -41,6 +41,9 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Import bootstrap css file
+app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
+
 // Import middleware for express-session and passport
 app.use(session({ secret: `${process.env.SESSION_SECRET}`, cookie: { maxAge: 3600000 }, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -108,7 +111,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {title: 'ERROR'});
 });
 
 module.exports = app;
