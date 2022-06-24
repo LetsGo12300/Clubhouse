@@ -37,7 +37,7 @@ function addMessage(data){
     let btn = '';
 
     if (data.userMemStatus === 'Admin'){
-        btn = `<button data-id=${data._id} class="delete-btn">Delete</button>`
+        btn = `<button data-id=${data._id} class="btn btn-danger btn-sm delete-btn">Delete</button>`
     }
 
     let content = `
@@ -46,16 +46,18 @@ function addMessage(data){
                 ${data.title}
             </div>
 
-            <div class="message-message">
+            <div class="message-message my-1">
                 ${data.message}
             </div>
 
-            <div class="message-author">
-                by ${data.user}
-            </div>
-
-            <div class="message-timestamp">
-                ${data.formatTimestamp}
+            <hr aria-hidden="true">	
+            <div style="color: #475569; font-size: 0.9em;">
+                <span class="message-author">
+                    Posted by ${data.user}
+                </span>
+                <span class="message-timestamp">
+                    ${data.formatTimestamp}
+                </span>
             </div>
 
             ${btn}

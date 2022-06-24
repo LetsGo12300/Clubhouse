@@ -19,7 +19,7 @@
 
 	<% if (user) { %>
 		<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
-			<h3>Add Message</h3>
+			<h1 class="display-6 mb-3">Add Message</h1>
 			<form class="form-message" method="POST" id="add-message-form">
 				<div class="row mb-2">
 					<label class="col-sm-1 col-form-label" for="title">Title: </label>
@@ -47,26 +47,30 @@
 		<% } %>
 	<% } %> 
 	
+	<h1 class="display-6">Messages</h1>
 	<div class="messages-container">
 		<% for (let i = 0; i < messages.length; i++) { %>
-			<div class="message-item" msg-id=<%= messages[i]._id %>>
+			<div class="message-item py-2 px-3" msg-id=<%= messages[i]._id %>>
 				<div class="message-title">
 					<%= messages[i].title %>
 				</div>
-				<div class="message-message">
+				<div class="message-message my-1">
 					<%= messages[i].message %>
 				</div>
 				<% if (user) { %>
 					<% if (user.membershipStatus === 'Admin') { %>
-						<button data-id=<%= messages[i]._id %> class="delete-btn">Delete</button>
+						<button data-id=<%= messages[i]._id %> class="btn btn-danger btn-sm delete-btn">Delete</button>
 					<% } %>
 
 					<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
-						<div class="message-author">
-							by <%= messages[i].user.fullName %>
-						</div>
-						<div class="message-timestamp">
-							<%= messages[i].formatTimestamp %>
+						<hr aria-hidden="true">	
+						<div style="color: #475569; font-size: 0.9em;">
+							<span class="message-author">
+								Posted by <%= messages[i].user.fullName %>
+							</span>
+							<span class="message-timestamp">
+								<%= messages[i].formatTimestamp %>
+							</span>
 						</div>
 					<% } %>
 				<% } %> 
