@@ -41,3 +41,7 @@ a {
   right: 0px;
   transform: translate(-0.5rem, 0.5rem);
 }
+
+.form-user{
+  max-width: 450px;  
+}

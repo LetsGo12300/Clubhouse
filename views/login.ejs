@@ -17,25 +17,26 @@
 </nav>
 <div class="container-fluid p-4">
 
-    <h1>Log In</h1>
-    <form action="/log-in" method="POST">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" placeholder="Enter your username">
+    <h1 class="display-6">Log In</h1>
+    <form class="form-user" action="/log-in" method="POST">
+        <div class="form-floating mt-3 mb-2">
+            <input class="form-control" type="text" name="username" id="username" placeholder="Enter your username">
+            <label class="form-label" for="username">Username</label>
         </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" class="password-input">
+        <div class="form-floating mb-2">
+            <input class="form-control password-input" type="password" name="password" id="password" placeholder="Enter your password">
+            <label class="form-label" for="password">Password</label>
         </div>
-        <div>
-            <input type="checkbox" id="checkbox" onclick="showPassword()">
-            <label for="checkbox">Show Password</label>
+        <div class="mb-3">
+            <input class="form-check-input" type="checkbox" id="checkbox" onclick="showPassword()">
+            <label class="form-check-label" for="checkbox">Show Password</label>
         </div>
-        <button>Log In</button>
+        <button type="submit" class="btn btn-primary">Log In</button>
     </form>
-    <br>
-    No account yet?
-    <a href="/sign-up">Sign Up now!</a>
+    <div class="mt-3">
+        No account yet?
+        <a href="/sign-up">Sign Up now!</a>
+    </div>
 
 	<script src="/javascripts/toggle-password.js"></script>
 <%- include('./partials/footer') %> 

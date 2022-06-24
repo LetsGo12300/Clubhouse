@@ -23,7 +23,6 @@ exports.signup_post = [
         const result = validationResult(req)
         if (!result.isEmpty()){
             const msg = "User failed to sign up!"
-            console.log(msg)
             // Pre-fill the sign up form with full name and username
             return res.render('signup', { title: 'Sign Up', msg: [msg, req.body.fullname, req.body.username], user: res.locals.currentUser })
         }
