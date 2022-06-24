@@ -23,7 +23,10 @@ window.addEventListener('click', event => {
         deleteMessage(`/api/delete/${messageID}`)
         .then(data => {
             console.log(data);
-            message.remove();
+            message.classList.add('message-hide');
+            setTimeout(() => {
+                message.remove();
+            }, 1200);
         })
         .catch(err => {
             console.log(err)
@@ -41,7 +44,7 @@ function addMessage(data){
     }
 
     let content = `
-        <div class="message-item" msg-id=${data._id}>
+        <div class="message-item message-show" msg-id=${data._id}>
             <div class="message-title">
                 ${data.title}
             </div>

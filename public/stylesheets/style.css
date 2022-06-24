@@ -24,9 +24,66 @@ a {
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
+.message-show{
+  animation: show 1s forwards ease-in-out;
+}
+
+@keyframes show{
+  0%{
+    margin: 0;
+    height: 0;
+    opacity: 0;
+    line-height: 0px;
+  }
+  70%{
+    height: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0rem;
+    min-height: 60px;
+    opacity: 1;
+    line-height: 100%;
+  }
+  100%{
+    height: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0rem;
+    min-height: 60px;
+    opacity: 1;
+    line-height: 100%;
+  }
+}
+
+.message-hide{
+  animation: hide 1.2s forwards ease-in-out;
+}
+
+@keyframes hide{
+  0%{
+    height: 100%;
+    margin: 1rem 0rem;
+    min-height: 60px;
+    opacity: 1;
+    line-height: 100%;
+  }
+  70%{
+    height: 100%;
+    margin: 1rem 0rem;
+    min-height: 60px;
+    opacity: 0;
+    line-height: 100%;
+  }
+  100%{
+    margin: 0;
+    height: 0;
+    opacity: 0;
+    line-height: 0px;
+  }
+}
+
 .message-title{
   font-weight: bold;
   margin-bottom: 3px;
+  max-width: calc(100% - 4rem);
 }
 
 .message-message{
