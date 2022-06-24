@@ -20,16 +20,24 @@
 	<% if (user) { %>
 		<% if (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin') { %>
 			<h3>Add Message</h3>
-			<form method="POST" id="add-message-form">
-				<div>
-					<label for="title">Title: </label>
-					<input type="text" name="title" id="title"/>
+			<form class="form-message" method="POST" id="add-message-form">
+				<div class="row mb-2">
+					<label class="col-sm-1 col-form-label" for="title">Title: </label>
+					<div class="col-sm-6">
+						<input class="form-control" type="text" name="title" id="title"/>
+					</div>
 				</div>
-				<div>
-					<p><label for="message">Message:</label></p>
-					<textarea id="message" name="message" rows="4" cols="50"></textarea>
+				<div class="row">
+					<label class="col-sm-1 col-form-label" for="message">Message:</label>
+					<div class="col-sm-6">
+						<textarea class="form-control" id="message" name="message" rows="4"></textarea>
+					</div>
 				</div>
-				<button type="submit" id="add-message-btn">Post</button>
+				<div class="row mt-2">
+					<div class="col-sm-7">
+						<button type="submit" class="btn btn-primary" id="add-message-btn">Post</button>
+					</div>
+				</div>
 			</form>
 			<script src="/javascripts/messages.js"></script>
 		<% } else if (user.membershipStatus === 'Non-member') { %>
