@@ -50,7 +50,11 @@
 	<h1 class="display-6">Messages</h1>
 	<div class="messages-container">
 		<% for (let i = 0; i < messages.length; i++) { %>
-			<div class="message-item py-2 px-3" msg-id=<%= messages[i]._id %>>
+			<% if (i >= 10) { %>
+				<div class="message-item py-2 px-3" style="display: none" <%= messages[i]._id %>>
+			<% } else { %>
+				<div class="message-item py-2 px-3" msg-id=<%= messages[i]._id %>>
+			<%  } %> 
 				<div class="message-title">
 					<%= messages[i].title %>
 				</div>
@@ -79,4 +83,6 @@
 	</div>
 
 	<script src="/javascripts/toggle-password.js"></script>
+	<script src="/javascripts/infinite-scroll.js"></script>
+
 <%- include('./partials/footer') %> 
