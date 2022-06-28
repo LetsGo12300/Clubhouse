@@ -10,6 +10,8 @@ There are three types of users:
 
 Secret password:  *bestclubever*
 
+[Check out the live demo on Heroku](https://clubhouse2022.herokuapp.com/)
+
 ## Built with
 
 - Node
