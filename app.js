@@ -9,6 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const bcrypt = require('bcryptjs');
+const favicon = require('serve-favicon');
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
@@ -43,6 +44,9 @@ app.set('view engine', 'ejs');
 
 // Use bootstrap files
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist/')));
+
+// Add favicon
+app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')));
 
 // Import middleware for express-session and passport
 app.use(session({ secret: `${process.env.SESSION_SECRET}`, cookie: { maxAge: 3600000 }, resave: false, saveUninitialized: true }));
