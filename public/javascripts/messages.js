@@ -44,7 +44,7 @@ function addMessage(data){
     }
 
     let content = `
-        <div class="message-item message-show" msg-id=${data._id}>
+        <div class="message-item py-2 px-3 message-show" msg-id=${data._id}>
             <div class="message-title">
                 ${data.title}
             </div>
