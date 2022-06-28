@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 passport.use(
     new LocalStrategy((username, password, done) => {
-      User.findOne({ username: username }, (err, user) => {
+      User.findOne({ username: username.toLowerCase() }, (err, user) => {
         if (err) { 
           return done(err);
         }
